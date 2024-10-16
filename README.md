@@ -4,8 +4,7 @@ Client app run based on nextjs and server app is a simple node.js express app.
 
 
 # WEB APP URL
-[https://translation-app-web.vercel.app/
-](url)
+[https://translation-app-web.vercel.app/](url)
 
 # Running locally
 
