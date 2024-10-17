@@ -12,5 +12,4 @@ export const getTranslations = async (sourceText:string, sourceLang:string, targ
       console.error(err)
       return "";
     });
-
   }

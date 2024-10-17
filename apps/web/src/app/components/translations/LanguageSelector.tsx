@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
-import styles from './language-selector.module.css';
+import styles from './LanguageSelector.module.css';
 
-interface SelectorContainerProps {
+interface LanguageSelectorProps {
   value: string;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
@@ -17,7 +17,7 @@ const languages = [
   // Add more languages as needed
 ];
 
-export const SelectorContainer: React.FC<SelectorContainerProps> = ({ value, onChange }) => {
+export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ value, onChange }) => {
 
   const handleOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
     onChange(e);

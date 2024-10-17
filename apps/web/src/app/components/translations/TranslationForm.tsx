@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import styles from './trasnlation-input.module.css';
-import { getTranslations } from '../services/translation-api';
-import { LanguageSelectorContainer } from './language-selector-container';
+import styles from './TranslationForm.module.css';
+import { getTranslations } from '../../services/TranslationApi';
+import { LanguageSelectorContainer } from './LanguageSelectorContainer';
 
-const TranslationInput: React.FC = () => {
+const TranslationForm: React.FC = () => {
   const [translatedText, setTranslatedText] = useState('');
   const [sourceText, setSourceText] = useState('');
   const [sourceLang, setSourceLang] = useState('en');
@@ -64,4 +64,4 @@ const TranslationInput: React.FC = () => {
   );
 };
 
-export default TranslationInput;
+export default TranslationForm;

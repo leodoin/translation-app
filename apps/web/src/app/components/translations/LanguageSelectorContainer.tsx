@@ -1,6 +1,6 @@
 import React from 'react';
-import { SelectorContainer } from './language-selector';
-import styles from './language-selector-container.module.css';
+import { LanguageSelector } from './LanguageSelector';
+import styles from './LanguageSelectorContainer.module.css';
 
 interface LanguageSelectorContainerProps {
   sourceLang: string;
@@ -19,14 +19,14 @@ export const LanguageSelectorContainer: React.FC<LanguageSelectorContainerProps>
     <div className={styles.selectorContainer}>
       <label>
         Source Language:
-        <SelectorContainer
+        <LanguageSelector
           value={sourceLang}
           onChange={onSourceLangChange}
         />
       </label>
       <label>
         Target Language:
-        <SelectorContainer
+        <LanguageSelector
           value={targetLang}
           onChange={onTargetLangChange}
         />
