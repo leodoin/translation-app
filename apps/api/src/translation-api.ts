@@ -1,7 +1,7 @@
 import { translateText } from './translation-service';
-import app from '../app';
+import asyncHandler from 'express-async-handler';
 
-app.post('/api/translation', async (req, res) => {
+export const translationApi = asyncHandler(async (req, res) => {
     const { text, sourceLang, targetLang } = req.body;
     if (!text || !sourceLang || !targetLang) {
         res.status(400).json({error: 'Missing required fields'})

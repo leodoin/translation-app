@@ -1,21 +1,29 @@
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
+import { translationApi } from './src/translation-api';
+import { helloWorldApi } from './src/hello-world-api';
 
-dotenv.config();
+const env = process.env.NODE_ENV || "dev";
+const config = require(`./config.${env}.json`);
 
-console.log('WEB_API_URL:', process.env.WEB_API_URL);
-console.log('PORT:', process.env.PORT);
+console.log('NODE_ENV:', process.env.NODE_ENV);
+
+const { port, allowCors } = config
 
 const app = express()
-const port = parseInt(process.env.PORT || '8080');
 
-app.use(cors({origin: process.env.WEB_APP_URL}))
-console.log(`CORS enabled for ${process.env.WEB_APP_URL}`)
+app.use(cors(allowCors))
+console.log(`CORS enabled for ${allowCors.origin}`)
+
 app.use(express.json())
+
 
 app.listen(port, () => {
   console.log(`app listening on http://localhost:${port}`)
 })
 
-export default app; // Export the express app
+app.get('/', helloWorldApi)
+
+app.post('/api/translation', translationApi)
+
+export default app;

@@ -1,5 +1,5 @@
-import app from '../app';
+import expressAsyncHandler from 'express-async-handler'
 
-app.get('/', (req, res) => {
+export const helloWorldApi = expressAsyncHandler(async (req, res) => {
     res.send('Hello World!')
-})
+});
