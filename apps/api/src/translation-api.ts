@@ -1,16 +1,5 @@
-import express from 'express';
 import { translateText } from './translation-service';
-import cors from 'cors';
-
-const app = express()
-const port = parseInt(process.env.PORT) || 8080;
-
-app.use(cors())
-app.use(express.json())
-
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+import app from '../app';
 
 app.post('/api/translation', async (req, res) => {
     const { text, sourceLang, targetLang } = req.body;
@@ -31,8 +20,3 @@ app.post('/api/translation', async (req, res) => {
         })
     }).then(translation => res.json({translation}));
 });
-
-
-app.listen(port, () => {
-  console.log(`app listening on http://localhost:${port}`)
-})
