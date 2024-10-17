@@ -1,9 +1,7 @@
 "use client";
 
-import Image from "next/image";
-import { Button } from "@repo/ui/button";
 import styles from "./page.module.css";
-import TranslationInput from "./components/translation-input/translation-input"; // Import the new component
+import TranslationInput from "./components/translation-input";
 
 
 
