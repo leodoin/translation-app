@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './trasnlation-input.module.css';
-import { SelectorContainer } from './selector-container';
 import { getTranslations } from '../services/translation-api';
+import { LanguageSelectorContainer } from './language-selector-container';
 
 const TranslationInput: React.FC = () => {
   const [translatedText, setTranslatedText] = useState('');
@@ -39,34 +39,20 @@ const TranslationInput: React.FC = () => {
     setTargetLang(e.target.value);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-  };
-
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
+    <div className={styles.translationForm}>
       <textarea
         value={sourceText}
         onChange={handleTextareaChange}
-        placeholder="Enter large text for translation"
+        placeholder="Enter text for translation"
         className={styles.textarea}
       />
-      <div className={styles.selectorContainer}>
-        <label>
-          Source Language:
-          <SelectorContainer
-            value={sourceLang}
-            onChange={handleSourceLangChange}
-          />
-        </label>
-        <label>
-          Target Language:
-          <SelectorContainer
-            value={targetLang}
-            onChange={handleTargetLangChange}
-          />
-        </label>
-      </div>
+      <LanguageSelectorContainer
+        sourceLang={sourceLang}
+        targetLang={targetLang}
+        onSourceLangChange={handleSourceLangChange}
+        onTargetLangChange={handleTargetLangChange}
+      />
       <textarea
         value={translatedText}
         readOnly
@@ -74,7 +60,7 @@ const TranslationInput: React.FC = () => {
         placeholder="Translation will appear here"
         className={styles.textarea}
       />
-    </form>
+    </div>
   );
 };
 

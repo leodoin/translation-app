@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react";
+import styles from './language-selector.module.css';
 
 interface SelectorContainerProps {
   value: string;
@@ -23,9 +24,9 @@ export const SelectorContainer: React.FC<SelectorContainerProps> = ({ value, onC
   }
   
   return (
-    <select value={value} onChange={handleOnChange}>
+    <select value={value} onChange={handleOnChange} className={styles.select}>
       {languages.map((lang) => (
-        <option key={lang.code} value={lang.code}>
+        <option className={styles.option} key={lang.code} value={lang.code}>
           {lang.name}
         </option>
       ))}

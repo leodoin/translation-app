@@ -1,0 +1,9 @@
+.select {
+  width: auto;
+  padding: 8px 12px; /* Add padding inside the dropdowns */
+  font-size: 14px;
+  border-radius: 4px; /* Soft border radius for dropdowns */
+  border: 1px solid #ccc;
+  background-color: #2e2e2e; /* Darker dropdown background */
+  color: #f1f1f1;
+}
