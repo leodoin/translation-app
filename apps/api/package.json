@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc --project ./",
     "dev": "nodemon --verbose app.ts --turbo",
-    "start": "node dist/app.js"
+    "start": "node app.js"
   },
   "dependencies": {
     "@google-cloud/translate": "^8.5.0",
