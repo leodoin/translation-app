@@ -1,12 +1,12 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "license": "MIT",
   "scripts": {
-    "build": "tsc --project ./",
+    "build": "tsc --project .",
     "dev": "nodemon --verbose app.ts --turbo",
-    "start": "node app.ts"
+    "start": "node dist/app.js"
   },
   "dependencies": {
     "@google-cloud/translate": "^8.5.0",
