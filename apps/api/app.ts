@@ -3,25 +3,19 @@ import cors from 'cors';
 import { translationApi } from './src/translation-api';
 import { helloWorldApi } from './src/hello-world-api';
 
-// const env = process.env.NODE_ENV || "dev";
-// const config = require(`./config.${env}.json`);
-
-// console.log('NODE_ENV:', process.env.NODE_ENV);
-
-// const { port, allowCors } = config
-
 const app = express()
 
+const port = 8080
+
 app.use(cors({
-  "origin":["https://translation-app-web.vercel.app/"]
+  "origin":['https://translation-app-web.vercel.app/','http://localhost:3000']
 }))
-// console.log(`CORS enabled for ${allowCors.origin}`)
 
 app.use(express.json())
 
 
-app.listen(8080, () => {
-  // console.log(`app listening on http://localhost:${port}`)
+app.listen(port, () => {
+  console.log(`app listening on http://localhost:${port}`)
 })
 
 app.get('/', helloWorldApi)
