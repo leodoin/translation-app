@@ -1,22 +1,28 @@
 .selectorContainer {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px; /* Add space between source and target language dropdowns */
+  display: flex;
+  justify-content: space-between; /* Aligns dropdowns to corners */
+  gap: 10px; /* Add space between the dropdowns */
+  flex-wrap: wrap; /* Allows wrapping when the container is too narrow */
+  width: 100%; /* Make the container take full width */
+}
+
+.selectorContainer label {
+  display: inline-flex; /* Prevent the label from taking full width */
+  flex-direction: column; /* Stack label text and select vertically */
+  font-size: 14px;
+  color: #f1f1f1;
+  align-items: flex-start; /* Align label to the left */
+  width: auto; /* Make the label only as wide as its contents */
+}
+
+
+@media (max-width: 500px) {
+  .selectorContainer {
+    flex-direction: column; /* Stack the dropdowns vertically on smaller screens */
   }
-  
-  .selectorContainer label {
-    display: flex;
-    flex-direction: column; /* Stack label text on top of the select element */
-    font-size: 14px;
-    color: #f1f1f1;
-  }
-  
+
   .selectorContainer select {
-    margin-top: 8px; /* Add a bit of space between the label and the dropdown */
-    padding: 8px 12px;
-    font-size: 14px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    background-color: #2e2e2e;
-    color: #f1f1f1;
+    width: 100%; /* Make the dropdowns take full width on mobile */
+    max-width: 100%; /* Remove the max-width constraint on smaller screens */
   }
+}

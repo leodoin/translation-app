@@ -1,9 +1,11 @@
 .select {
-  width: auto;
-  padding: 8px 12px; /* Add padding inside the dropdowns */
+  margin-top: 8px; /* Space between the label and dropdown */
+  padding: 8px 12px;
   font-size: 14px;
-  border-radius: 4px; /* Soft border radius for dropdowns */
+  border-radius: 4px;
   border: 1px solid #ccc;
-  background-color: #2e2e2e; /* Darker dropdown background */
+  background-color: #2e2e2e;
   color: #f1f1f1;
+  max-width: 200px; /* Set a reasonable max-width for smaller screens */
+  flex: 1; /* Allow the dropdown to take up available space */
 }
