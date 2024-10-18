@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    // "skipLibCheck": true,   // Uncomment this line if you have issues with types
     "module": "commonjs",
     "esModuleInterop": true,
     "target": "es6",
