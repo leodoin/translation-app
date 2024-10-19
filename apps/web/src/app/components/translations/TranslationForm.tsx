@@ -15,9 +15,9 @@ const TranslationForm: React.FC = () => {
 
   const handleMsg = (msg:any) => { console.log(msg) }
   const handleError = (error: string) => { console.error(error) }
-  const handleNotification = (notification: any) => { console.log(notification) }
+  const handleNotification = (notification: any) => { console.debug(notification) }
   const handleTranslation = (translation: any) => { 
-    console.log(translation);
+    console.debug(translation);
     setTranslatedText(translation.translation)
   }
   
