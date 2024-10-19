@@ -34,10 +34,8 @@ type ConnectionParams = {
 }
 
 
-
-
-// const socket = io("https://translations-service-332538335160.europe-west4.run.app",{
-  const socket = io("http://localhost:8080", { 
+const socket = io("https://translations-service-332538335160.europe-west4.run.app",{
+  // const socket = io("http://localhost:8080", { 
     
   transports: ["websocket"],
   autoConnect: false,
