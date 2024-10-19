@@ -33,11 +33,13 @@ type ConnectionParams = {
   errorHandler: ErrorHandler;
 }
 
+
+
 //const socket = io(`http://localhost:3001}`);
 const socket = io("https://translations-service-332538335160.europe-west4.run.app", {
-  transports: ["websocket"]
+  transports: ["websocket"],
+  autoConnect: false,
 });
-let isConnected = false;
 
 
 const connect = ({
@@ -51,11 +53,13 @@ const connect = ({
   // Initialize Socket.io
     // Emit "join" event with chat room
     console.log('connecting to chat room', roomId); 
-    if (isConnected) {
+    if (socket.connected) {
       console.log('already connected');
       return;
     }
-    isConnected = true;
+
+    socket.connect();
+
     socket.emit('signin', {userId, roomId}, errorHandler);
     socket.on('message', messageHandler);
     socket.on('notification', notificationHandler);
