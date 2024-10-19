@@ -23,7 +23,12 @@ const redisClient = require('redis').createClient({
 
 // Connect to the Redis server
 (async () => {
-  await redisClient.connect();
+  try{
+    await redisClient.connect();
+    console.log('CacheService connected to Redis');
+  } catch (err) {
+    console.error('CacheService failed to connect to Redis:', err);
+  }
 })();
 // [END cloudrun_websockets_redis]
 
