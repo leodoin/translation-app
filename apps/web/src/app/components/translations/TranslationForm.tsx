@@ -30,7 +30,7 @@ const TranslationForm: React.FC = () => {
   }
 
   useEffect(() => {
-    handleconnect();
+    //handleconnect();
   }, []);
 
 
