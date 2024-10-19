@@ -36,8 +36,9 @@ type ConnectionParams = {
 
 
 
-const socket = io("https://translations-service-332538335160.europe-west4.run.app",{
-  // const socket = io("http://localhost:3001", { //http://localhost:3001
+// const socket = io("https://translations-service-332538335160.europe-west4.run.app",{
+  const socket = io("http://localhost:8080", { 
+    
   transports: ["websocket"],
   autoConnect: false,
 });
@@ -81,13 +82,13 @@ const disconnect = (errorHandler: ErrorHandler) => {
 
 const sendMessage = (msg: string, errorHandler: ErrorHandler) => {
     // Emit "sendMessage" event with message
-    console.log('sending message', msg);
+    console.debug('sending message', msg);
     socket.emit('sendMessage', msg, errorHandler);
 }
 
 const sendTranslation = (text: string, sourceLang: string, targetLang: string, errorHandler: ErrorHandler) => {
     // Emit "translate" event with text, source language, and target language
-    console.log('sending translation', text, sourceLang, targetLang);
+    console.debug('translating', text)
     socket.emit('translate', text, sourceLang, targetLang, errorHandler);
 }
 

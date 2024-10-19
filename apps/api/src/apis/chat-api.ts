@@ -59,7 +59,9 @@ export const onIOConnection = (io:Server, socket:Socket) => {
   socket.on('sendMessage', (message:string, callback) => {
     // Retrieve user's name and chat room  from socket ID
     console.log('sendMessage', message);
-    const {userId, roomId} = getUser(socket.id);
+    const user = getUser(socket.id);
+    if(!user?.roomId) { return; }
+    const {userId, roomId} = user;
     if(!roomId) { callback('User session not found.'); }
       const msg = {userId, text: message};
       // Push message to clients in chat room
@@ -68,8 +70,9 @@ export const onIOConnection = (io:Server, socket:Socket) => {
 
   socket.on('translate', (text, sourceLang, targetLang, callback) => {
     console.log('translate', text, sourceLang, targetLang);
-    const {userId, roomId} = getUser(socket.id);
-    if(!roomId) { return; }
+    const user = getUser(socket.id);
+    if(!user?.roomId) { return; }
+    const {userId, roomId} = user;
     translateText(text, sourceLang, targetLang)
     .then(translation => {
       io.in(roomId).emit('translation', {

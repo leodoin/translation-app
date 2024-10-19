@@ -14,9 +14,10 @@ const TranslationForm: React.FC = () => {
   const [targetLang, setTargetLang] = useState('fr');
 
   const handleMsg = (msg:any) => { console.log(msg) }
-  const handleError = (error: string) => { console.error(console.log(`Error: ${error}`)) }
+  const handleError = (error: string) => { console.error(error) }
   const handleNotification = (notification: any) => { console.log(notification) }
   const handleTranslation = (translation: any) => { 
+    console.log(translation);
     setTranslatedText(translation.translation)
   }
   

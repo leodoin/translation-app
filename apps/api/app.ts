@@ -2,6 +2,7 @@ import express from 'express';
 import { translationApi } from './src/apis/translation-api';
 import { helloWorldApi } from './src/apis/hello-world-api';
 import cors from 'cors';
+import http from 'http';
 
 import { Redis } from "ioredis";
 import { Server } from "socket.io";
@@ -17,30 +18,34 @@ const pubClient = new Redis({
 const subClient = pubClient.duplicate();
 
 pubClient.on('connect', () => {
-  console.log('Publisher Redis client connected: '+process.env.REDISHOST);
+  console.log('Publisher Redis client connected: '+process.env.REDISHOST+':'+process.env.REDISPORT);
 });
 
 pubClient.on('error', (err) => {
   console.error('Publisher Redis client error:', err);
 });
 
-const io = new Server({
-  adapter: createAdapter(pubClient, subClient),
-  cors: {origin: '*'}
-});
-
 const app = express()
+
+app.use(express.json())
+app.use(cors())
+
+app.get('/', helloWorldApi)
+
+app.post('/api/translation', translationApi)
 
 const port = parseInt(process.env.PORT || '8080')
 
-app.use(express.json())
 
-app.use(cors())
+const server = app.listen(port, () => {
+  console.log(`app listening on http://localhost:${port}`)
+})
 
-io.listen(3001);
-
-
-console.log('Socket.io listening on port 3001');
+//bind socket.io to the http server
+const io = new Server(server, {
+  adapter: createAdapter(pubClient, subClient),
+  cors: {origin: '*'}
+});
 
 io.on('connection', (socket) => {
   console.log('socket connected', socket.id);
@@ -48,15 +53,6 @@ io.on('connection', (socket) => {
 });
 
 io.on('error', (err) => {console.error('Socket.io error:', err)});
-
-
-app.listen(port, () => {
-  console.log(`app listening on http://localhost:${port}`)
-})
-
-app.get('/', helloWorldApi)
-
-app.post('/api/translation', translationApi)
 
 
 export default app;
