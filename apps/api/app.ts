@@ -10,8 +10,8 @@ import { onIOConnection } from './src/apis/chat-api';
 
 
 const pubClient = new Redis({
-  host: process.env.REDIS_HOST || 'localhost',
-  port: parseInt(process.env.REDIS_PORT || '6379'),
+  host: process.env.REDISHOST || 'localhost',
+  port: parseInt(process.env.REDISPORT || '6379'),
 });
 const subClient = pubClient.duplicate();
 
