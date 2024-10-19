@@ -84,6 +84,8 @@ const TranslationForm: React.FC = () => {
         onSourceLangChange={handleSourceLangChange}
         onTargetLangChange={handleTargetLangChange}
       />
+      <button onClick={handleSend}>Send</button>
+      <button onClick={handleconnect}>Send</button>
       <textarea
         value={translatedText}
         readOnly
