@@ -32,7 +32,7 @@ type ConnectionParams = {
   errorHandler: ErrorHandler;
 }
 
-const socket = io(process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001');
+const socket = io(`wws://${process.env.NEXT_PUBLIC_API_BASE_URI}` || 'http://localhost:3001');
 let isConnected = false;
 
 

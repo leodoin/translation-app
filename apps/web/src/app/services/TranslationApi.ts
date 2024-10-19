@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const getTranslations = async (sourceText:string, sourceLang:string, targetLang:string) => {
 
-    return await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/translation`, {
+    return await axios.post(`https://${process.env.NEXT_PUBLIC_API_BASE_URI}/api/translation`, {
       text: sourceText,
       sourceLang,
       targetLang
