@@ -17,7 +17,7 @@ const pubClient = new Redis({
 const subClient = pubClient.duplicate();
 
 pubClient.on('connect', () => {
-  console.log('Publisher Redis client connected');
+  console.log('Publisher Redis client connected: '+process.env.REDISHOST);
 });
 
 pubClient.on('error', (err) => {
