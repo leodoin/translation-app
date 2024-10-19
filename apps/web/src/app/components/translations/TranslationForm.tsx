@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import styles from './TranslationForm.module.css';
 import { getTranslations } from '../../services/TranslationApi';
 import { LanguageSelectorContainer } from './LanguageSelectorContainer';
+import { chatApi } from '../../services/chatApi';
+import { error } from 'console';
+import { Button } from '@repo/ui/button';
+import { text } from 'stream/consumers';
 
 const TranslationForm: React.FC = () => {
   const [translatedText, setTranslatedText] = useState('');
@@ -9,6 +13,25 @@ const TranslationForm: React.FC = () => {
   const [sourceLang, setSourceLang] = useState('en');
   const [targetLang, setTargetLang] = useState('fr');
 
+  const handleMsg = (msg:any) => { console.log(msg) }
+  const handleError = (error: string) => { console.error(console.log(`Error: ${error}`)) }
+  const handleNotification = (notification: any) => { console.log(notification) }
+  const handleTranslation = (translation: any) => { 
+    setTranslatedText(translation.translation)
+  }
+  
+  const connectionParams = {
+    userId: 'connectedUser',
+    roomId: 'connectedRoom',
+    messageHandler: handleMsg,
+    notificationHandler: handleNotification,
+    translateHandler: handleTranslation,
+    errorHandler: handleError
+  }
+
+  useEffect(() => {
+    handleconnect();
+  }, []);
 
 
   const handleTextareaChange = async (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -24,19 +47,27 @@ const TranslationForm: React.FC = () => {
       setTranslatedText(sourceText);
       return;
     }
-    const fetchTranslation = async () => {
-      const translation = await getTranslations(sourceText, sourceLang, targetLang);
-      setTranslatedText(translation);
-    };
-    fetchTranslation();
+    chatApi.sendTranslation(sourceText, sourceLang, targetLang, handleError);
+
   }, [sourceText, sourceLang, targetLang]);
+
+  const handleSend = () => {
+    chatApi.sendMessage(sourceText, handleError);
+  }
+
+  const handleconnect = () => {
+    chatApi.connect(connectionParams);
+  }
 
   const handleSourceLangChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSourceLang(e.target.value);
+    chatApi.sendMessage('new source language: '+e.target.value, handleError);
   };
 
   const handleTargetLangChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setTargetLang(e.target.value);
+    chatApi.sendMessage('new target language: '+e.target.value, handleError);
+
   };
 
   return (

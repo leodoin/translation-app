@@ -1,15 +1,39 @@
 import express from 'express';
-import { translationApi } from './src/translation-api';
-import { helloWorldApi } from './src/hello-world-api';
+import { translationApi } from './src/apis/translation-api';
+import { helloWorldApi } from './src/apis/hello-world-api';
 import cors from 'cors';
+
+import { Redis } from "ioredis";
+import { Server } from "socket.io";
+import { createAdapter } from "@socket.io/redis-adapter";
+import { onIOConnection } from './src/apis/chat-api';
+
+
+const pubClient = new Redis();
+const subClient = pubClient.duplicate();
+
+const io = new Server({
+  adapter: createAdapter(pubClient, subClient),
+  cors: {origin: '*'}
+});
 
 const app = express()
 
-const port = 8080
+const port = parseInt(process.env.PORT || '8080')
 
 app.use(express.json())
 
 app.use(cors())
+
+app.use(express.static(__dirname + '/public'))
+
+io.listen(3001);
+
+console.log('Socket.io listening on port 3001');
+
+io.on('connection', (socket) => {
+  onIOConnection(io, socket);
+});
 
 
 app.listen(port, () => {
@@ -19,5 +43,6 @@ app.listen(port, () => {
 app.get('/', helloWorldApi)
 
 app.post('/api/translation', translationApi)
+
 
 export default app;

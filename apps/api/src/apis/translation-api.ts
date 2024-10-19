@@ -1,4 +1,4 @@
-import { translateText } from './translation-service';
+import { translateText } from '../services/translation-service';
 import asyncHandler from 'express-async-handler';
 
 export const translationApi = asyncHandler(async (req, res) => {
