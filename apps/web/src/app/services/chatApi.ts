@@ -1,6 +1,6 @@
 'use client';
 import { io } from 'socket.io-client';
-import { API_BASE_URI } from './TranslationApi';
+import nextConfig from '../../../next.config.mjs';
 
 type ErrorHandler = (errorMsg: string) => void;
 
@@ -33,7 +33,7 @@ type ConnectionParams = {
   errorHandler: ErrorHandler;
 }
 
-const socket = io(`wws://${API_BASE_URI}` || 'http://localhost:3001');
+const socket = io(`wws://${nextConfig.apiUri}` || 'http://localhost:3001');
 let isConnected = false;
 
 
