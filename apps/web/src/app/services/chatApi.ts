@@ -1,5 +1,6 @@
 'use client';
 import { io } from 'socket.io-client';
+import { API_BASE_URI } from './TranslationApi';
 
 type ErrorHandler = (errorMsg: string) => void;
 
@@ -32,7 +33,7 @@ type ConnectionParams = {
   errorHandler: ErrorHandler;
 }
 
-const socket = io(`wws://${process.env.NEXT_PUBLIC_API_BASE_URI}` || 'http://localhost:3001');
+const socket = io(`wws://${API_BASE_URI}` || 'http://localhost:3001');
 let isConnected = false;
 
 
