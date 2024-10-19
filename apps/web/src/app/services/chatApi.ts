@@ -33,7 +33,8 @@ type ConnectionParams = {
   errorHandler: ErrorHandler;
 }
 
-const socket = io(`wws://${nextConfig.apiUri}` || 'http://localhost:3001');
+//const socket = io(`http://localhost:3001}`);
+const socket = io("translations-service-332538335160.europe-west4.run.app");
 let isConnected = false;
 
 
