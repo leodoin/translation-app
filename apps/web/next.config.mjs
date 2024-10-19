@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    apiUri: process.env.NEXT_PUBLIC_API_BASE_URI,
+    apiUri: "translations-service-332538335160.europe-west4.run.app",
 };
 
 export default nextConfig;
