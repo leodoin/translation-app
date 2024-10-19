@@ -35,8 +35,8 @@ type ConnectionParams = {
 
 
 
-//const socket = io(`http://localhost:3001}`);
-const socket = io("https://translations-service-332538335160.europe-west4.run.app", {
+
+const socket = io("https://translations-service-332538335160.europe-west4.run.app", { //http://localhost:3001
   transports: ["websocket"],
   autoConnect: false,
 });

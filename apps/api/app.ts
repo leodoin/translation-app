@@ -9,7 +9,10 @@ import { createAdapter } from "@socket.io/redis-adapter";
 import { onIOConnection } from './src/apis/chat-api';
 
 
-const pubClient = new Redis();
+const pubClient = new Redis({
+  host: process.env.REDIS_HOST || 'localhost',
+  port: parseInt(process.env.REDIS_PORT || '6379'),
+});
 const subClient = pubClient.duplicate();
 
 const io = new Server({
@@ -24,8 +27,6 @@ const port = parseInt(process.env.PORT || '8080')
 app.use(express.json())
 
 app.use(cors())
-
-app.use(express.static(__dirname + '/public'))
 
 io.listen(3001);
 
